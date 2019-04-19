@@ -31,9 +31,8 @@ def detect_it(image_gray,debug):
 
 
 #for function unit test
-'''
-import sys
-image = cv.imread(sys.argv[1])
-gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-print(detect_it(gray,1))
-'''
+if __name__ == '__main__':
+    import sys
+    image = cv.imread(sys.argv[1])
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    print(detect_it(gray,1))

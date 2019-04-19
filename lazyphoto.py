@@ -6,14 +6,17 @@ import string
 from detect import *
 from makephoto import *
 
+def random_string_generator(str_size, allowed_chars):
+    return 'lazyphoto-bottomdata-com-'+''.join(random.choice(allowed_chars) for x in range(str_size))
+
 app, inputfile = sys.argv
+
+image = cv.imread(inputfile)
+gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
 ppi=300
 target_w = int(1.5*ppi)
 target_h = int(2*ppi)
-
-def random_string_generator(str_size, allowed_chars):
-    return 'lazyphoto-bottomdata-com-'+''.join(random.choice(allowed_chars) for x in range(str_size))
 
 #create temp working folder
 WORK_DIR="./workspace"
@@ -25,8 +28,6 @@ os.chdir(WORK_DIR+"/"+out_folder)
 #out_file = random_string_generator(size, chars)
 out_file = out_folder
 
-image = cv.imread(sys.argv[1])
-gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
 #1 find face
 x,y,w,h = detect_it(gray,0)
