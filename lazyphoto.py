@@ -13,7 +13,7 @@ target_w = int(1.5*ppi)
 target_h = int(2*ppi)
 
 def random_string_generator(str_size, allowed_chars):
-    return ''.join(random.choice(allowed_chars) for x in range(str_size))
+    return 'lazyphoto-bottomdata-com-'+''.join(random.choice(allowed_chars) for x in range(str_size))
 
 #create temp working folder
 WORK_DIR="./workspace"
@@ -22,12 +22,14 @@ size = 12
 out_folder = random_string_generator(size, chars)
 os.makedirs(WORK_DIR+"/"+out_folder)
 os.chdir(WORK_DIR+"/"+out_folder)
+#out_file = random_string_generator(size, chars)
+out_file = out_folder
 
 image = cv.imread(sys.argv[1])
 gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
 #1 find face
-x,y,w,h = detect_it(gray)
+x,y,w,h = detect_it(gray,0)
 #print(x,y,w,h)
 #cv.rectangle(image, (x,y), (x+w,y+h), (255,255,255))
 #cv.imwrite("test1.jpg", image)
@@ -58,10 +60,10 @@ sub_face = image[y:y+h, x:x+w]
 #3 resize to target size
 #print(x,y,target_w, target_h)
 resized = cv.resize(sub_face, (target_w, target_h))
-cv.imwrite("test3.jpg", resized)
+cv.imwrite(out_file+"single.jpg", resized)
 
 #4 beautify
-img = Image.open("test3.jpg")
+img = Image.open(out_file+"single.jpg")
 beautified = beautify_img(img)
 
 #5 make photo
@@ -74,11 +76,10 @@ elif crop_size_inch_w > 4 and crop_size_inch_w < 8:
 else:
     photo_paper_size = (4,6)
 
-out_file = random_string_generator(size, chars)
-make_photo(beautified, photo_paper_size, out_file,"jpeg")
+make_photo(beautified, photo_paper_size, out_file,"jpg")
 
 print(os.getcwd())
-print("found photo: "+out_file+".jpeg")
+print("found photo: "+out_file+".jpg")
 print("Please print on photo paper size: "+str(photo_paper_size[0])+"x"+str(photo_paper_size[1]))
 
 
