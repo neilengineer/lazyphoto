@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Too lazy to edit visa/passport photo? Use lazyphoto.bottomdata.com</title>
+  <meta name="description" content="Free online visa and passport photo editor">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  {% block javascript %}
+    <script type="text/javascript">
+        {% include "d3.js" %}
+    </script>
+  {% endblock %}
+</head>
+
+<body>
+  <div class="mytitle">
+      <a class="button button-primary" href="/">Home</a>
+      <a class="button button-primary" href="/lazyphoto">Lazyphoto</a>
+  </div>
+
+  <!-- main content -->
+  <div>{% block content %}{% endblock %}</div>
+  <hr>
+
+  <!-- footer -->
+  <div class="row">
+        <div class="myfooter">
+        Copyrights@<a href="http://www.bottomdata.com">bottomdata.com</a>
+        Welcome to share, for commercial use, please  <a href="neilchiao@gmail.com">Contact us</a>
+        </div>
+  </div>
+</body>
+
+

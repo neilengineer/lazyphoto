@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div style="text-align: center" class="row">
+        <h4>Just upload your photo here! Photo must be 300x300 mininum</h4>
+        <div id="lazyphoto"></div>
+        <h5><b>
+        <form style="text-align: center" action="{{ uploadurl }}" method="POST" enctype="multipart/form-data">
+          Now, upload your file: <input type="file" name="file">
+          <input type="submit" name="submit" value="Submit">
+        </form>
+        </b></h5>
+    </div>
+
+  </div>
+{% endblock %}
+
