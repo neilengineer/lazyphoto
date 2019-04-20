@@ -9,14 +9,24 @@ def detect_it(image_gray,debug):
     faceCascade = cv.CascadeClassifier(filterPath)
 
     # Detect faces in the image
-    faces = faceCascade.detectMultiScale(
-        image_gray,
-        scaleFactor = 1.5,
-        minSize = (100,100),
-        minNeighbors = 1
-    )
+    loop = 0
+    scale = 2
+    while loop < 5:
+        print("detect time: "+str(loop))
+        faces = faceCascade.detectMultiScale(
+            image_gray,
+            scaleFactor = scale,
+            minSize = (300,300),
+            minNeighbors = 1
+        )
+        if len(faces) != 1:
+            loop += 1
+            scale -= 0.2
+        else:
+            break;
 
     if debug == 1:
+        ret = None
         for face in faces:
             x,y,w,h = face
             ret = cv.rectangle(image, (x,y), (x+w,y+h), (255,255,255))
