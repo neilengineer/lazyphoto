@@ -40,8 +40,8 @@ center_x = int(x+w/2)
 center_y = int(y+h/2)
 #increase w,h by ratio
 h_w_ratio = target_h/target_w
-zoom=2
-w = w*zoom
+zoom=1.4
+w = int(w*zoom)
 h = int(w*h_w_ratio)
 #adjust x,y with new w,h
 x = int(center_x-w/2)
