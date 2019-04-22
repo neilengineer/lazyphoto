@@ -6,9 +6,6 @@ import string
 from detect import *
 from makephoto import *
 
-def random_string_generator(str_size, allowed_chars):
-    return 'lazyphoto-bottomdata-com-'+''.join(random.choice(allowed_chars) for x in range(str_size))
-
 def lazyphoto_process_main(inputfile):
     image = cv.imread(inputfile)
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
@@ -16,16 +13,6 @@ def lazyphoto_process_main(inputfile):
     ppi=300
     target_w = int(1.5*ppi)
     target_h = int(2*ppi)
-
-    #create temp working folder
-    WORK_DIR="./workspace"
-    chars = string.ascii_letters + string.digits
-    size = 12
-    out_folder = random_string_generator(size, chars)
-    os.makedirs(WORK_DIR+"/"+out_folder)
-    os.chdir(WORK_DIR+"/"+out_folder)
-    #out_file = random_string_generator(size, chars)
-    out_file = out_folder
 
     #1 find face
     x,y,w,h = detect_it(gray,0)
@@ -59,6 +46,8 @@ def lazyphoto_process_main(inputfile):
     #3 resize to target size
     #print(x,y,target_w, target_h)
     resized = cv.resize(sub_face, (target_w, target_h))
+
+    out_file = 'lazyphoto-bottomdata-com-'+os.path.basename(inputfile)
     cv.imwrite(out_file+"-single.jpg", resized)
 
     #4 beautify
@@ -77,12 +66,14 @@ def lazyphoto_process_main(inputfile):
 
     make_photo(beautified, photo_paper_size, out_file,"jpg")
 
-    print(os.getcwd())
-    print("found photo: "+out_file+".jpg")
-    print("Please print on photo paper size: "+str(photo_paper_size[0])+"x"+str(photo_paper_size[1]))
+    return out_file
+#    return os.path.join(os.getcwd(), out_file)
+#    print(os.getcwd())
+#    print("found photo: "+out_file+".jpg")
+#    print("Please print on photo paper size: "+str(photo_paper_size[0])+"x"+str(photo_paper_size[1]))
 
 
 #unit test
-lazyphoto_process_main(sys.argv[1])
+#print(lazyphoto_process_main(sys.argv[1]))
 
 
