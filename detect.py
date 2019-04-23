@@ -16,7 +16,7 @@ def detect_it(image_gray,debug):
         faces = faceCascade.detectMultiScale(
             image_gray,
             scaleFactor = scale,
-            minSize = (300,300),
+            minSize = (200,200),
             minNeighbors = 1
         )
         if len(faces) != 1:

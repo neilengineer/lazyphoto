@@ -74,6 +74,7 @@ def lazyphoto_process_main(inputfile):
 
 
 #unit test
-#print(lazyphoto_process_main(sys.argv[1]))
+if __name__ == '__main__':
+    print(lazyphoto_process_main(sys.argv[1]))
 
 
