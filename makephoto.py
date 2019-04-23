@@ -16,8 +16,8 @@ def beautify_img(img_obj):
 
 #Make photo e.g. 4x6 inch
 #photo_size in inch
-def make_photo(img_obj, photo_size, target_name, target_type):
-	target_file_name=target_name+"."+target_type
+def make_photo(img_obj, photo_size, target_name):
+	target_file_name=target_name
 
 	#300 PPI is usual photo quality
 	ppi=300

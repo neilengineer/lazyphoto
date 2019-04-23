@@ -2,20 +2,16 @@
 {% block content %}
   <div class="container">
     <div style="text-align: center" class="row">
-        <h4>Just upload your photo here! Photo must be 300x300 mininum</h4>
+        <h4>Just upload your photo, and give target photo size here! Photo must be 300x300 mininum.</h4>
         <div id="lazyphoto"></div>
         <h5><b>
-        <form style="text-align: center" action="{{ uploadurl }}" method="POST" enctype="multipart/form-data">
-		<div>Step 1) Upload your photo: <input type="file" name="file"></div>
-		<div>Step 2) What's the size? 
-			
-		</div>
-
-          <input type="submit" name="submit" value="Submit">
+        <form style="text-align: left" action="{{ uploadurl }}" method="POST" enctype="multipart/form-data">
+		    Step 1) Upload your photo: <input type="file" name="file"><br>
+		    Step 2) What's the target photo size (in inch)? Width: <input type="text" name="width">, Height: <input type="text" name="height">
+                    <input type="submit" name="submit" value="Submit">
         </form>
         </b></h5>
     </div>
-
   </div>
 {% endblock %}
 

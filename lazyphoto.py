@@ -6,13 +6,18 @@ import string
 from detect import *
 from makephoto import *
 
-def lazyphoto_process_main(inputfile):
-    image = cv.imread(inputfile)
-    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+def lazyphoto_process_main(inputfile,width,height):
+    base = os.path.basename(inputfile)
+    out_file = 'lazyphoto-bottomdata-com-'+os.path.splitext(base)[0]
+    out_file_final = out_file+'.jpg'
+    out_file_final_single = out_file+'-single.jpg'
 
     ppi=300
-    target_w = int(1.5*ppi)
-    target_h = int(2*ppi)
+    target_w = int(width*ppi)
+    target_h = int(height*ppi)
+
+    image = cv.imread(inputfile)
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
     #1 find face
     x,y,w,h = detect_it(gray,0)
@@ -46,12 +51,10 @@ def lazyphoto_process_main(inputfile):
     #3 resize to target size
     #print(x,y,target_w, target_h)
     resized = cv.resize(sub_face, (target_w, target_h))
-
-    out_file = 'lazyphoto-bottomdata-com-'+os.path.basename(inputfile)
-    cv.imwrite(out_file+"-single.jpg", resized)
+    cv.imwrite(out_file_final_single, resized)
 
     #4 beautify
-    img = Image.open(out_file+"-single.jpg")
+    img = Image.open(out_file_final_single)
     beautified = beautify_img(img)
 
     #5 make photo
@@ -64,17 +67,18 @@ def lazyphoto_process_main(inputfile):
     else:
         photo_paper_size = (4,6)
 
-    make_photo(beautified, photo_paper_size, out_file,"jpg")
+    make_photo(beautified, photo_paper_size, out_file_final)
+    dis_string = "Please print on photo paper size: "+str(photo_paper_size[0])+"x"+str(photo_paper_size[1])
+    output = (out_file_final,out_file_final_single,dis_string)
+    return output
 
-    return out_file
 #    return os.path.join(os.getcwd(), out_file)
 #    print(os.getcwd())
 #    print("found photo: "+out_file+".jpg")
-#    print("Please print on photo paper size: "+str(photo_paper_size[0])+"x"+str(photo_paper_size[1]))
 
 
 #unit test
 if __name__ == '__main__':
-    print(lazyphoto_process_main(sys.argv[1]))
+    print(lazyphoto_process_main(sys.argv[1],1.5,2))
 
 
