@@ -2,8 +2,13 @@
 {% block content %}
   <div class="container">
     <div style="text-align: center" class="row">
+        <h4> Target photo size: {{w}}x{{h}} inches </h4>
         <h4> {{dis_string}} </h4>
-        <img src="{{ img_name }}" alt="your photo">
+        <h2><b> When printing, do not add any margins in printer setting! </b></h2>
+        <div>
+            <img src="{{ img_name_single }}" alt="your photo single" width="200" >
+            <img src="{{ img_name }}" alt="your photo" width="200" >
+        </div>
     </div>
   </div>
 {% endblock %}

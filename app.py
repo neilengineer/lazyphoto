@@ -38,6 +38,8 @@ def lazyphoto_results():
         if w != "" or h != "":
             w = float(w)
             h = float(h)
+            if w > 10 or h > 10:
+                return redirect(url_for('process_photo'))
         else:
             return redirect(url_for('process_photo'))
 
@@ -56,10 +58,12 @@ def lazyphoto_results():
 
             final_img_name, final_img_name_single, dis_string = lazyphoto_process_main(filename,w,h)
             final_img_name = os.path.join(out_folder,final_img_name)
+            final_img_name_single = os.path.join(out_folder,final_img_name_single)
             dis_img = url_for('send_file', filename=final_img_name)
+            dis_img_single = url_for('send_file', filename=final_img_name_single)
             os.chdir(old_dir)
-            return render_template('lazyphoto-result.html', img_name=dis_img,
-                    dis_string=dis_string)
+            return render_template('lazyphoto-result.html', img_name=dis_img, img_name_single=dis_img_single,
+                    dis_string=dis_string, w=w, h=h)
     return page_not_found(404)
 
 @app.errorhandler(404)

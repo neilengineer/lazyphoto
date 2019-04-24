@@ -68,7 +68,7 @@ def lazyphoto_process_main(inputfile,width,height):
         photo_paper_size = (4,6)
 
     make_photo(beautified, photo_paper_size, out_file_final)
-    dis_string = "Please print on photo paper size: "+str(photo_paper_size[0])+"x"+str(photo_paper_size[1])
+    dis_string = 'Print on photo paper with size: '+str(photo_paper_size[0])+"x"+str(photo_paper_size[1]) + ' inches'
     output = (out_file_final,out_file_final_single,dis_string)
     return output
 
